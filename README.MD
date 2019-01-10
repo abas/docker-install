@@ -5,8 +5,8 @@ the purpose of the project is to simplify docker install with just running singl
 
 ``` bash
     # clone this repo and enter on the project
-    $ git clone url
-    $ cd repo
+    $ git clone {repo_url}
+    $ cd docker-install
     $ chmod +x *
     
     # install docker
