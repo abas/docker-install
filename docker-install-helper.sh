@@ -138,6 +138,7 @@ function endis-docker () {
     elif [[ $2 = "enable" ]];then
         endis_command=start
     else
+        systemctl enable docker
         endis_command=start
     fi
 
