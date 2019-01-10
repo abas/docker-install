@@ -7,7 +7,7 @@ function package-remover () {
     case $1 in
     "-debian")
         apt-get remove -y docker docker-engine docker.io containerd runc
-        repo_updater() $1
+        repo_updater $1
     ;;
     "-fedora")
         yum remove -y docker \
@@ -23,7 +23,7 @@ function package-remover () {
     ;;
     "-ubuntu")
         apt-get remove -y docker docker-engine docker.io containerd runc
-        repo_updater() $1
+        repo_updater $1
     ;;
     *)
         echo " |-- no option on package remover"
@@ -85,7 +85,7 @@ function repo-updater () {
 
 # setup stable repository
 function repo-stable () {
-    repo-stable=" |- configure stable repository"
+    echo " |- configure stable repository"
     case $1 in
     "-debian")
         add-apt-repository \
@@ -114,14 +114,14 @@ function docker-install () {
     install=" |- installing docker"
     case $1 in
     "-debian")
-        repo_updater() $1
+        repo_updater $1
         apt-get install docker-ce
     ;;
     "-fedora")
         yum install docker-ce -y
     ;;
     "-ubuntu")
-        repo_updater() $1
+        repo_updater $1
         apt-get install docker-ce
     ;;
     *) echo " |-- no option on docker install"
