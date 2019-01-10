@@ -10,14 +10,18 @@ the purpose of the project is to simplify docker install with just running singl
     $ chmod +x *
     
     # install docker
-    $ ./docker-install.sh [-base_os] # or you can with `bash docker-install.sh`
+    $ ./docker-install.sh [-base_os] --default # or you can with `bash docker-install.sh`
+
+    # install portainer, docker container management
+    $ ./docker-install.sh [-base_os] --add portainer [port] # port is optional, default 9000
 ```
 
 > Note
+- `--default` will install docker only
 
 docker-installer command option
 ``` bash
-    $ command [option]
+    $ command [option_os] --default
     - option : 
         -debian <- base OS debias .deb specify
         -fedora <- base OS fedora like centos etc
@@ -28,5 +32,5 @@ docker-installer command option
     $ ./docker-installer.sh -ubuntu # for fedora
 ```
 
-> Note II
+> Note End
 don't hesitate to make `issue` :>
