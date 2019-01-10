@@ -7,7 +7,7 @@ the purpose of the project is to simplify docker install with just running singl
     # clone this repo and enter on the project
     $ git clone {repo_url}
     $ cd docker-install
-    $ chmod +x *
+    $ chmod +x * && sudo su # don't forger we must access with root
     
     # install docker
     $ ./docker-install.sh [-base_os] --default # or you can with `bash docker-install.sh`
