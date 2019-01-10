@@ -32,5 +32,10 @@ docker-installer command option
     $ ./docker-installer.sh -ubuntu --default # for ubuntu
 ```
 
+> Next Objective
+
+- `add` progressbar
+- `refactor` docker-install.sh with functionable structure
+
 > Note End
 don't hesitate to make `issue` :>
