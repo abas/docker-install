@@ -67,10 +67,10 @@ function repo-config () {
 
 # repository updater
 function repo-updater () {
-    repo_update=" |- updating repository"
+    echo " |- updating repository"
     case $1 in
     "-debian")
-
+        apt-get update -y
     ;;
     "-fedora")
         yum update -y
