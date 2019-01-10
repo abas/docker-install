@@ -19,7 +19,7 @@ if [[ -z $1 ]];then
     echo "=-"
     echo ""
 else
-    if [[ $2 = "--default" ]];then
+    if [[ $2 = "--default" ]] && [[ -z $3 ]];then
         if [[ $1 = "-fedora" ]];then
             passline "adding epel-release repository"
             yum install -y epel-release
@@ -39,8 +39,8 @@ else
         docker-install $1
 
         passline "enable service"
-        endis-docker $1 $2
-    else 
+        endis-docker $1 enable
+    else
         if [[ $2 = "--add" ]];then
             case $3 in
             "portainer")
