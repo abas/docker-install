@@ -138,22 +138,22 @@ function endis-docker () {
     elif [[ $2 = "enable" ]];then
         endis_command=start
     else
-        endis_command=enable
+        endis_command=start
     fi
 
-    echo "systemctl $2 docker"
+    systemctl $2 docker
     if [[ $endis_command = null ]];then
         exit
     else
         case $1 in
         "-debian")
-            echo "systemctl $endis_command docker"
+            systemctl $endis_command docker
         ;;
         "-fedora")
-            echo "systemctl $endis_command docker"
+            systemctl $endis_command docker
         ;;
         "-ubuntu")
-            echo "systemctl $endis_command docker"
+            systemctl $endis_command docker
         ;;
         *) echo " |-- no option on endis docker"
         esac
