@@ -138,12 +138,11 @@ function endis-docker () {
     elif [[ $2 = "enable" ]];then
         endis_command=start
     else
-        endis_command=null
-        echo "send [disable/enable] command"
+        endis_command=enable
     fi
 
     echo "systemctl $2 docker"
-    if [[ endis_command = "null" ]];then
+    if [[ $endis_command = null ]];then
         exit
     else
         case $1 in
