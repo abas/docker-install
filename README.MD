@@ -27,9 +27,9 @@ docker-installer command option
         -fedora <- base OS fedora like centos etc
         -ubuntu <- base OS ubuntu
     ex :
-    $ ./docker-installer.sh -debian # for fedora
+    $ ./docker-installer.sh -debian # for debias
     $ ./docker-installer.sh -fedora # for fedora
-    $ ./docker-installer.sh -ubuntu # for fedora
+    $ ./docker-installer.sh -ubuntu # for ubuntu
 ```
 
 > Note End
