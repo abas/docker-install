@@ -31,6 +31,4 @@ docker-install() $1
 passline() "enable service"
 endis-docker() $1 $2
 
-echo "---=[ DOCKER INSTALLER ]=---"
-echo "|    credit by : [Abas]    |"
-echo "----------------------------"
+echo "---=[ DONE ]=---"
