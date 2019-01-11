@@ -1,0 +1,45 @@
+# ~~~ database service ~~~
+#
+#                    ##        .
+#              ## ## ##       ==
+#           ## ## ## ##      ===
+#       /""""""""""""""""\___/ ===
+#  ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===- ~~~
+#       \______ o          __/
+#         \    \        __/
+#          \____\______/
+#
+#          |          |
+#       __ |  __   __ | _  __   _
+#      /  \| /  \ /   |/  / _\ |
+#      \__/| \__/ \__ |\_ \__  |
+#
+# ~~~ mongo database dashboard ~~~
+
+version: '3.1'
+
+networks:
+  local_net:
+    external:
+      name: local
+
+volumes:
+  dbdata:
+    driver: local
+
+services:
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    networks:
+      - local_net
+    external_links:
+      - mongo:mongodb # mongo database container
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: jangan_lupa_di_ganti
+      ME_CONFIG_MONGODB_AUTH_USERNAME: root
+      ME_CONFIG_MONGODB_AUTH_PASSWORD: jangan_lupa_di_ganti
