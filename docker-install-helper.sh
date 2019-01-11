@@ -161,3 +161,13 @@ function endis-docker () {
         echo " |- $2 successfull"
     fi
 }
+
+# numeric checker
+function is_number () {
+    regex='^[0-9]+$'
+    if ! [[ $1 =~ $regex ]];then
+        echo false
+    else
+        echo true
+    fi
+}
