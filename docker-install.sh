@@ -44,11 +44,13 @@ else
         if [[ $2 = "--add" ]];then
             case $3 in
             "portainer")
-                expose_port=$5
-                container_name=$4
-                docker volume create portainer_data
+                if [[ $(docker volume ls | grep portainer_data > /dev/null ;echo $?) -gt 0 ]];then
+                    docker volume create portainer_data
+                else
+                    echo "portainer volume is Existed"
+                fi
 
-                function crete_container_portainer () {
+                function create_container_portainer () {
                     # $1 container_name
                     # $2 expose_port
                     docker run -d \
@@ -59,16 +61,21 @@ else
                             portainer/portainer
                 }
 
-                if [[ -z $5 ]] && [[ -z $4 ]];then
-                    crete_container_portainer portainer 9000
-                else
-                    if [[ -z $4 ]];then
-                        crete_container_portainer $container_name 9000
-                    elif [[ -z $5 ]];then
-                        crete_container_portainer portainer $expose_port
+                # command -bas_os --add portainer "portainer-d" 12345
+                if [[ -z $5 ]];then
+                    if [[ $(is_number $4) = "false" ]];then
+                        # command -base_os --add portainer 12345 <- port
+                        create_container_portainer "portainer" $4
                     else
-                        crete_container_portainer $container_name $expose_port
+                        # command -base_od --add portainer "portainer-d" <- containe_name
+                        create_container_portainer $4 9000
                     fi
+                elif [[ -z $4 ]];then 
+                    create_container_portainer "portainer" 9000
+                else
+                    # $4 - container_name
+                    # $5 - expose_port
+                    create_container_portainer $4 $5
                 fi
                 docker ps -a | grep portainer
             ;;
