@@ -16,6 +16,6 @@
 
 FROM nginx:1.15.1
 
-LABEL Abas <akhmadbasir5@gmail.com>
+LABEL Kankuu <akhmadbasir5@gmail.com>
 
 COPY vhost.conf /etc/nginx/conf.d/default.conf

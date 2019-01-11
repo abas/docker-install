@@ -18,7 +18,7 @@
 FROM php:7.2-fpm-alpine
 
 # Maintainer
-LABEL Abas <akhmadbasir5@gmail.com>
+LABEL Kankuu <akhmadbasir5@gmail.com>
 
 # Install dependencies
 RUN apk --update add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/v3.6/main curl curl-dev 
