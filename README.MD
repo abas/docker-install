@@ -13,7 +13,12 @@ the purpose of the project is to simplify docker install with just running singl
     $ ./docker-install.sh [-base_os] --default # or you can with `bash docker-install.sh`
 
     # install portainer, docker container management
+    $ ./docker-install.sh [-base_os] --add portainer # port is optional, default 9000, container name is portainer
+
+    # portainer with custom `port` / `container name`
     $ ./docker-install.sh [-base_os] --add portainer [port] # port is optional, default 9000
+    $ ./docker-install.sh [-base_os] --add portainer [container_name] # port is optional, default 9000
+    $ ./docker-install.sh [-base_os] --add portainer [container_name] [port] # port is optional, default 9000
 ```
 
 > Note
