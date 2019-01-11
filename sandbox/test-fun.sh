@@ -1,5 +1,5 @@
 #!/bin/bash
 set -e
-source "../docker-install-helper.sh"
+source /Users/vander/.abas/docker-install/docker-install-helper.sh
 
-endis-docker -fedora disable
+is_number "anone"
