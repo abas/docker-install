@@ -1,0 +1,42 @@
+# ~~~ database service ~~~
+#
+#                    ##        .
+#              ## ## ##       ==
+#           ## ## ## ##      ===
+#       /""""""""""""""""\___/ ===
+#  ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===- ~~~
+#       \______ o          __/
+#         \    \        __/
+#          \____\______/
+#
+#          |          |
+#       __ |  __   __ | _  __   _
+#      /  \| /  \ /   |/  / _\ |
+#      \__/| \__/ \__ |\_ \__  |
+#
+# ~~~ mongo database ~~~
+
+version: '3.1'
+
+networks:
+  local_net:
+    external:
+      name: local
+
+volumes:
+  dbdata:
+    driver: local
+
+services:
+  mongodb:
+    image: mongo
+    restart: always
+    container_name: mongodb
+    ports:
+      - 27017:27017
+    networks:
+      - local_net
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: jangan_lupa_di_ganti
+
