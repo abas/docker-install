@@ -44,22 +44,31 @@ else
         if [[ $2 = "--add" ]];then
             case $3 in
             "portainer")
-                export_port=$4
+                expose_port=$5
+                container_name=$4
                 docker volume create portainer_data
-                if [[ -z $4 ]];then
+
+                function crete_container_portainer () {
+                    # $1 container_name
+                    # $2 expose_port
                     docker run -d \
-                            --name portainer \
-                            -p 9000:9000 \
+                            --name $1 \
+                            -p $2:9000 \
                             -v /var/run/docker.sock:/var/run/docker.sock \
                             -v portainer_data:/data \
                             portainer/portainer
+                }
+
+                if [[ -z $5 ]] && [[ -z $4 ]];then
+                    crete_container_portainer portainer 9000
                 else
-                    docker run -d \
-                            --name portainer \
-                            -p $export_port:9000 \
-                            -v /var/run/docker.sock:/var/run/docker.sock \
-                            -v portainer_data:/data \
-                            portainer/portainer
+                    if [[ -z $4 ]];then
+                        crete_container_portainer $container_name 9000
+                    elif [[ -z $5 ]];then
+                        crete_container_portainer portainer $expose_port
+                    else
+                        crete_container_portainer $container_name $expose_port
+                    fi
                 fi
                 docker ps -a | grep portainer
             ;;
