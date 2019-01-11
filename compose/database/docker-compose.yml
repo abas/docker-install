@@ -1,0 +1,57 @@
+# ~~~ database service ~~~
+#
+#                    ##        .
+#              ## ## ##       ==
+#           ## ## ## ##      ===
+#       /""""""""""""""""\___/ ===
+#  ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===- ~~~
+#       \______ o          __/
+#         \    \        __/
+#          \____\______/
+#
+#          |          |
+#       __ |  __   __ | _  __   _
+#      /  \| /  \ /   |/  / _\ |
+#      \__/| \__/ \__ |\_ \__  |
+#
+# ~~~ mysql database & phpmyadmin ~~~
+
+version: "3" # docker -compose version
+
+networks:
+  local_net:
+    external:
+      name: local
+
+volumes:
+  dbdata:
+    driver: local
+
+services:
+# Database Container
+  mysql-database:
+    image: mysql:5.7
+    container_name: mysql-database
+    volumes:
+      - dbdata:/var/lib/mysql
+    # ports:
+    #   - "33061:3306" # ex -> 33060:3306
+    networks:
+      - local_net
+    environment:
+      - "MYSQL_ROOT_PASSWORD=jangan_lupa_di_ganti"
+
+# Dashboard DB Container
+  phpmyadmin: 
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin
+    ports:
+      - "34567:80"
+    networks:
+      - local_net
+    links:
+      - mysql-database:mysql-database
+    #external_links:
+      #- CONTAINER:ALIAS
+    environment:
+      - "PMA_HOST=mysql-database"
