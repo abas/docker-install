@@ -49,4 +49,4 @@ docker-installer command option
 - `refactor` docker-install.sh with functionable structure
 
 > Note End
-don't hesitate to make `issue` :>
+don't hesitate to make `issue` and `pull request` :>
