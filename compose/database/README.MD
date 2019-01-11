@@ -1,6 +1,6 @@
 # Docker Mysql Database with Phpmyadmin
-> Note
-dont forget to create network bridging
+> Instruction
+create network local
 
 ```bash
     $ docker network craete local # local <- is for example
