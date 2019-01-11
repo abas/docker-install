@@ -1,6 +1,11 @@
 # Docker single run Install
 the purpose of the project is to simplify docker install with just running single file
 
+### Included
+= database `mysql` compose
+- `laravel` compose
+- `composer` docker command
+
 > how to use
 
 ``` bash
@@ -39,6 +44,7 @@ docker-installer command option
 
 > Next Objective
 
+- `docker-compose` installer
 - `add` progressbar
 - `refactor` docker-install.sh with functionable structure
 
