@@ -1,0 +1,64 @@
+# ~~~ database service ~~~
+#
+#                    ##        .
+#              ## ## ##       ==
+#           ## ## ## ##      ===
+#       /""""""""""""""""\___/ ===
+#  ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===- ~~~
+#       \______ o          __/
+#         \    \        __/
+#          \____\______/
+#
+#          |          |
+#       __ |  __   __ | _  __   _
+#      /  \| /  \ /   |/  / _\ |
+#      \__/| \__/ \__ |\_ \__  |
+#
+# ~~~ gitea selfhost ~~~
+
+version: "3"
+
+networks:
+  local_net: 
+    external:
+      name: local
+
+volumes:
+  dbdata:
+    driver: local
+
+services:
+  gitea-server:
+    image: gitea/gitea:latest
+    container_name: gitea-server
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+      - DB_TYPE=postgres
+      - DB_HOST=gitea-db:5432
+      - DB_NAME=gitea-database
+      - DB_USER=user
+      - DB_PASSWD=pass
+    restart: always
+    networks:
+      - local_net
+    volumes:
+      - ./gitea:/data
+    ports:
+      - expose_port:3000
+      - expose_port:22
+    depends_on:
+     - gitea-db
+
+  gitea-db:
+    image: postgres:9.6
+    restart: always
+    container_name: gitea-db
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_DB=gitea-database
+    networks:
+      - local_net
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
