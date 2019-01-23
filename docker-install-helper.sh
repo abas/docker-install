@@ -171,3 +171,15 @@ function is_number () {
         echo true
     fi
 }
+
+# docker-compose getter file
+function get-compose {
+    target_dir=/usr/local/bin/docker-compose
+    target_link_download="https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)"
+    if [[ $(curl -L $target_link_download -o $target_dir > /dev/null 2>&1 ;echo $?) -gt 0 ]]; then
+        echo "error : $?"
+    else
+        echo "successful get file docker-compose installer"
+        ls $target_dir | grep docker-compose
+    fi
+}
