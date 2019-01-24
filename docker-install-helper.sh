@@ -200,15 +200,17 @@ function docker-compose-install () {
 }
 
 # docker-compose checker is Exist 
-function docker-compose-checker () {
+function ishas-docker-compose () {
     function is-exist-dcfile () {
         ls $1 | grep docker-compose > /dev/null ;echo $?
     }
-    is-exist-local=$(is-exist-dcfile /usr/local/bin/)
-    is-exist-global=$(is-exist-dcfile /usr/bin/)
-    if [[ $is-exist-local -gt 0 ]] && [[ $is-exist-global -gt 0 ]]; then
-        echo "exist"
+    is_exist_local=$(is-exist-dcfile /usr/local/bin/)
+    echo $is_exist_local
+    is_exist_global=$(is-exist-dcfile /usr/bin/)
+    echo $is_exist_global
+    if [[ $is_exist_local -eq 0 ]] || [[ $is_exist_global -eq 0 ]]; then
+        echo true # exist
     else
-        echo "doesnt-exist"
+        echo false # doesnt exist
     fi
 }
