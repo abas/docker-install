@@ -173,7 +173,7 @@ function is_number () {
 }
 
 # docker-compose getter file
-function docker-compose-install {
+function docker-compose-install () {
     target_dir=/usr/local/bin/docker-compose
     target_link_download="https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)"
 
@@ -196,5 +196,19 @@ function docker-compose-install {
             fi
         fi
         echo "|- install docker-compose done"
+    fi
+}
+
+# docker-compose checker is Exist 
+function docker-compose-checker () {
+    function is-exist-dcfile () {
+        ls $1 | grep docker-compose > /dev/null ;echo $?
+    }
+    is-exist-local=$(is-exist-dcfile /usr/local/bin/)
+    is-exist-global=$(is-exist-dcfile /usr/bin/)
+    if [[ $is-exist-local -gt 0 ]] && [[ $is-exist-global -gt 0 ]]; then
+        echo "exist"
+    else
+        echo "doesnt-exist"
     fi
 }
