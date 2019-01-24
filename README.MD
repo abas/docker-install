@@ -58,7 +58,7 @@ docker-installer command option
 > Next Objective
 
 - [ ] compose `node-apps`
-- [v] `docker-compose` installer
+- [X] `docker-compose` installer
 - [ ] `add` progressbar
 - [ ] `refactor` docker-install.sh with functionable structure
 
