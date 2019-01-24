@@ -12,7 +12,7 @@ fi
 echo ""
 echo "|- testing docker-compose-checker"
 
-if [[ docker-compose-checker == true ]]; then
+if [[ ishas-docker-compose == true ]]; then
     echo "docker-compose exist at"
     which docker-compose
 else
