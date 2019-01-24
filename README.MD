@@ -2,7 +2,7 @@
 the purpose of the project is to simplify docker install with just running single file
 
 ### Included
-= database `mysql` compose
+- database `mysql` compose
 - `laravel` compose
 - `composer` docker command
 - `docker-compose` installer
