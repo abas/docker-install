@@ -173,13 +173,28 @@ function is_number () {
 }
 
 # docker-compose getter file
-function get-compose {
+function docker-compose-install {
     target_dir=/usr/local/bin/docker-compose
     target_link_download="https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)"
+
+    echo "|- getting started to get docker-compose binary file.."
     if [[ $(curl -L $target_link_download -o $target_dir > /dev/null 2>&1 ;echo $?) -gt 0 ]]; then
-        echo "error : $?"
+        echo "|-- error : $?"
     else
-        echo "successful get file docker-compose installer"
+        echo "|-- successful get file docker-compose installer"
         ls $target_dir | grep docker-compose
+        echo "|- making permission to execute"
+        if [[ $(chmod +x /usr/local/bin/docker-compose > /dev/null 2>&1 ;echo $?) -gt 0 ]]; then
+            echo "|-- changing permission failed"
+        else
+            echo "|-- changing permission success"
+            echo "|- linking to /usr/bin/"
+            if [[ $(ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose > /dev/null 2>&1 ;echo $?) -gt 0 ]]; then
+                echo "|-- error linking binary file"
+            else
+                echo "|-- docker-compose binary linked"
+            fi
+        fi
+        echo "|- install docker-compose done"
     fi
 }
