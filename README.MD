@@ -6,7 +6,7 @@ the purpose of the project is to simplify docker install with just running singl
 - `laravel` compose
 - `composer` docker command
 
-> how to use
+> how to install `Docker`
 
 ``` bash
     # clone this repo and enter on the project
@@ -16,7 +16,14 @@ the purpose of the project is to simplify docker install with just running singl
     
     # install docker
     $ ./docker-install.sh [-base_os] --default # or you can with `bash docker-install.sh`
+```
 
+> Note
+- `--default` will install docker only
+
+> how to install docker `Portainer`
+
+```bash
     # install portainer, docker container management
     $ ./docker-install.sh [-base_os] --add portainer # port is optional, default 9000, container name is portainer
 
@@ -26,12 +33,16 @@ the purpose of the project is to simplify docker install with just running singl
     $ ./docker-install.sh [-base_os] --add portainer [container_name] [port] # port is optional, default 9000
 ```
 
-> Note
-- `--default` will install docker only
+> how to install `docker-compose`
+
+```bash
+    $ ./docker-install.sh [-base_os] --add docker-compose
+    # this feature is support on linux, and also mac :> could it be ?
+```
 
 docker-installer command option
-``` bash
-    $ command [option_os] --default
+```bash
+    $ command [-base_os] --default
     - option : 
         -debian <- base OS debias .deb specify
         -fedora <- base OS fedora like centos etc
@@ -50,4 +61,5 @@ docker-installer command option
 - `refactor` docker-install.sh with functionable structure
 
 > Note End
-don't hesitate to make `issue` and `pull request` :>
+
+<kankuu> don't hesitate to make `issue` and `pull request` :>
