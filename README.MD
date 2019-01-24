@@ -5,6 +5,8 @@ the purpose of the project is to simplify docker install with just running singl
 = database `mysql` compose
 - `laravel` compose
 - `composer` docker command
+- `docker-compose` installer
+- `portainer` installer
 
 > how to install `Docker`
 
@@ -55,10 +57,10 @@ docker-installer command option
 
 > Next Objective
 
-- compose `node-apps`
-- `docker-compose` installer
-- `add` progressbar
-- `refactor` docker-install.sh with functionable structure
+- [ ] compose `node-apps`
+- [v] `docker-compose` installer
+- [ ] `add` progressbar
+- [ ] `refactor` docker-install.sh with functionable structure
 
 > Note End
 
