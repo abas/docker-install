@@ -22,6 +22,7 @@ the purpose of the project is to simplify docker install with just running singl
 
 > Note
 - `--default` will install docker only
+- if there any `errors` on your progress, try running with root previllage.
 
 > how to install docker `Portainer`
 
