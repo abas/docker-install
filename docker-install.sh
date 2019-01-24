@@ -79,7 +79,25 @@ else
                 fi
                 docker ps -a | grep portainer
             ;;
-            *) echo "--add option : [portainer,] - request for other"
+            "docker-compose")
+                if ! [[ -z $4 ]]; then
+                    echo "|- ./docker-install.sh [base_os] --add docker-compose"
+                    echo "|-- there is no optional here :> sorry"
+                else
+                    if [[ ishas-docker-compose == true ]]; then
+                        echo "|-- docker-compose exist at : $(which docker-compose) :>"
+                    else
+                        echo "|- installing docker-compose.."
+                        docker-compose-install
+                    fi
+                fi
+            ;;
+            *) 
+                echo "--add option :"
+                echo "|- portainer : dashboard container portainer installer"
+                echo "|- docker-compose : docker-compose installer"
+                echo "|"
+                echo "|-- pull request for other :>"
             esac
         else
             echo "./docker-install.sh [-option-os] --add [-option-add]"
