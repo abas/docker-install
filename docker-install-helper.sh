@@ -52,7 +52,7 @@ function repo-config () {
             lvm2
     ;;
     "-ubuntu")
-        apt-get install \
+        apt-get install -y \
                 apt-transport-https \
                 ca-certificates \
                 curl \
@@ -88,7 +88,7 @@ function repo-stable () {
     echo " |- configure stable repository"
     case $1 in
     "-debian")
-        add-apt-repository \
+        add-apt-repository -y \
             "deb [arch=amd64] https://download.docker.com/linux/debian \
             $(lsb_release -cs) \
             stable"
@@ -99,7 +99,7 @@ function repo-stable () {
             https://download.docker.com/linux/centos/docker-ce.repo
     ;;
     "-ubuntu")
-        add-apt-repository \
+        add-apt-repository -y \
             "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
             $(lsb_release -cs) \
             stable"
@@ -115,14 +115,14 @@ function docker-install () {
     case $1 in
     "-debian")
         repo-updater $1
-        apt-get install docker-ce
+        apt-get install -y docker-ce
     ;;
     "-fedora")
         yum install docker-ce -y
     ;;
     "-ubuntu")
         repo-updater $1
-        apt-get install docker-ce
+        apt-get install -y docker-ce
     ;;
     *) echo " |-- no option on docker install"
     esac
