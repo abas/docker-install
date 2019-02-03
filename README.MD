@@ -8,6 +8,11 @@ the purpose of the project is to simplify docker install with just running singl
 - `docker-compose` installer
 - `portainer` installer
 
+### Requirement
+- git
+- curl
+
+
 > how to install `Docker`
 
 ``` bash

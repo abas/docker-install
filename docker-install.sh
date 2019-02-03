@@ -39,7 +39,7 @@ else
         docker-install $1
 
         passline "enable service"
-        endis-docker $1 enable
+        endis-docker start
     else
         if [[ $2 = "--add" ]];then
             case $3 in
