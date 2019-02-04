@@ -7,7 +7,7 @@ function package-remover () {
     case $1 in
     "-debian")
         apt-get remove -y docker docker-engine docker.io containerd runc
-        repo_updater $1
+        repo-updater $1
     ;;
     "-fedora")
         yum remove -y docker \
@@ -23,7 +23,7 @@ function package-remover () {
     ;;
     "-ubuntu")
         apt-get remove -y docker docker-engine docker.io containerd runc
-        repo_updater $1
+        repo-updater $1
     ;;
     *)
         echo " |-- no option on package remover"
@@ -52,7 +52,7 @@ function repo-config () {
             lvm2
     ;;
     "-ubuntu")
-        apt-get install \
+        apt-get install -y \
                 apt-transport-https \
                 ca-certificates \
                 curl \
@@ -88,7 +88,7 @@ function repo-stable () {
     echo " |- configure stable repository"
     case $1 in
     "-debian")
-        add-apt-repository \
+        add-apt-repository -y \
             "deb [arch=amd64] https://download.docker.com/linux/debian \
             $(lsb_release -cs) \
             stable"
@@ -99,7 +99,7 @@ function repo-stable () {
             https://download.docker.com/linux/centos/docker-ce.repo
     ;;
     "-ubuntu")
-        add-apt-repository \
+        add-apt-repository -y \
             "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
             $(lsb_release -cs) \
             stable"
@@ -114,15 +114,15 @@ function docker-install () {
     install=" |- installing docker"
     case $1 in
     "-debian")
-        repo_updater $1
-        apt-get install docker-ce
+        repo-updater $1
+        apt-get install -y docker-ce
     ;;
     "-fedora")
         yum install docker-ce -y
     ;;
     "-ubuntu")
-        repo_updater $1
-        apt-get install docker-ce
+        repo-updater $1
+        apt-get install -y docker-ce
     ;;
     *) echo " |-- no option on docker install"
     esac
@@ -131,34 +131,32 @@ function docker-install () {
 
 # service enable / disable docker service
 function endis-docker () {
-    # $2 -> enable or disable
-    endis_message=" |- $2 docker service"
-    if [[ $2 = "disable" ]];then
-        endis_command=stop
-    elif [[ $2 = "enable" ]];then
-        endis_command=start
-    else
-        systemctl enable docker
-        endis_command=start
-    fi
+    function start-enable-dockerd () {
+        if [[ systemctl-check == "installed" ]]; then
+            echo " |- enable docker service.." \
+            && systemctl enable docker \
+            && echo " |-- enable successfull!" \
 
-    systemctl $2 docker
-    if [[ $endis_command = null ]];then
-        exit
+            echo "|- starting docker service.." \
+            && systemctl start docker \
+            && echo " |-- starting successfull." \
+            || echo " |-- starting failed!"
+        else
+            echo " |- starting docker service.." \
+            && service docker start \
+            && echo " |-- staring successfull!" \
+            || echo " |-- starting failed!"
+        fi
+    }
+
+    if [[ -z $1 ]]; then
+        echo " |-- error no option parameter on enable disable docker function.."
     else
-        case $1 in
-        "-debian")
-            systemctl $endis_command docker
-        ;;
-        "-fedora")
-            systemctl $endis_command docker
-        ;;
-        "-ubuntu")
-            systemctl $endis_command docker
-        ;;
-        *) echo " |-- no option on endis docker"
-        esac
-        echo " |- $2 successfull"
+        if [[ $1 = "start" ]]; then
+            start-enable-dockerd && echo " |- starting done."
+        else
+            echo " |- option : [start]"
+        fi
     fi
 }
 
@@ -213,4 +211,14 @@ function ishas-docker-compose () {
     else
         echo false # doesnt exist
     fi
+}
+
+# systemctl checker
+function systemctl-check () {
+    status = $(systemctl -h > /dev/null 2>&1 ;echo $?)
+    if [[ $status -gt 0 ]]; then
+        echo "not-installed"
+    else
+        echo "installed"
+    fi 
 }
