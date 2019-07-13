@@ -6,7 +6,7 @@ function package-remover () {
     echo " |- removing package.."
     case $1 in
     "-debian")
-        apt-get remove -y docker docker-engine docker.io containerd runc
+        apt-get remove -y docker docker.io runc
         repo-updater $1
     ;;
     "-fedora")
