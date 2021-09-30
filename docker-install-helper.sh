@@ -22,7 +22,7 @@ function package-remover () {
             docker-engine
     ;;
     "-ubuntu")
-        apt-get remove -y docker docker-engine docker.io containerd runc
+        apt-get remove -y docker docker-engine docker.io containerd runc || echo "some package is unavailable!"
         repo-updater $1
     ;;
     *)
